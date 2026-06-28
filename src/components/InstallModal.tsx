@@ -8,7 +8,7 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
 }
 
-const DISMISSED_KEY = "yousound.installDismissed";
+const INSTALLED_KEY = "yousound.installed";
 
 export default function InstallModal() {
   const { t } = useI18n();
@@ -17,8 +17,8 @@ export default function InstallModal() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Don't show again if user already dismissed in this session
-    if (sessionStorage.getItem(DISMISSED_KEY)) return;
+    // Don't show if user already installed
+    if (localStorage.getItem(INSTALLED_KEY)) return;
 
     const handler = (e: Event) => {
       e.preventDefault();
@@ -36,14 +36,15 @@ export default function InstallModal() {
     await deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
     if (outcome === "accepted") {
-      setVisible(false);
+      localStorage.setItem(INSTALLED_KEY, "1");
     }
+    setVisible(false);
     setDeferredPrompt(null);
   };
 
   const handleDismiss = () => {
     setVisible(false);
-    sessionStorage.setItem(DISMISSED_KEY, "1");
+    // No persistent flag — modal will show again on next refresh
   };
 
   if (!visible) return null;
@@ -57,6 +58,19 @@ export default function InstallModal() {
       />
       {/* Modal */}
       <div className="relative w-full max-w-sm animate-[slideUp_0.35s_ease-out] rounded-3xl border border-dream-purple/20 bg-white p-6 shadow-soft">
+        {/* Close button */}
+        <button
+          type="button"
+          onClick={handleDismiss}
+          aria-label="Close"
+          className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-ink-400 transition hover:bg-dream-mist hover:text-ink-700"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+
         <div className="flex flex-col items-center text-center">
           {/* PWA icon */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
