@@ -4,42 +4,45 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const outDir = join(__dirname, "..", "public", "icons");
-mkdirSync(outDir, { recursive: true });
+const iconsDir = join(__dirname, "..", "public", "icons");
+mkdirSync(iconsDir, { recursive: true });
 
-const svg = (size) => `
-<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 512 512">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#fffdf9"/>
-      <stop offset="1" stop-color="#f2e6cf"/>
-    </linearGradient>
-    <linearGradient id="note" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#c9b48f"/>
-      <stop offset="1" stop-color="#9c7f50"/>
-    </linearGradient>
-  </defs>
-  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
-  <g fill="url(#note)">
-    <path d="M196 120 L356 96 C372 93 384 105 384 121 L384 300
-      C384 314 374 326 360 329 L344 332 C319 337 296 320 296 296
-      C296 277 310 261 330 257 L348 254 L348 168 L232 186 L232 330
-      C232 344 222 356 208 359 L192 362 C167 367 144 350 144 326
-      C144 307 158 291 178 287 L196 284 Z"/>
-  </g>
-</svg>`;
+const source = join(iconsDir, "yousound-icon.png");
 
+// Standard "any" icons: just resize the source artwork.
 for (const size of [192, 512]) {
-  await sharp(Buffer.from(svg(size)))
-    .resize(size, size)
+  await sharp(source)
+    .resize(size, size, { fit: "cover" })
     .png()
-    .toFile(join(outDir, `icon-${size}.png`));
+    .toFile(join(iconsDir, `icon-${size}.png`));
   console.log(`wrote icon-${size}.png`);
 }
 
-// Maskable icon (extra padding handled by the rounded background already)
-await sharp(Buffer.from(svg(512)))
-  .resize(512, 512)
+// Apple touch icon.
+await sharp(source)
+  .resize(180, 180, { fit: "cover" })
   .png()
-  .toFile(join(outDir, "maskable-512.png"));
+  .toFile(join(iconsDir, "apple-touch-icon.png"));
+console.log("wrote apple-touch-icon.png");
+
+// Maskable icon: place the artwork inside a safe zone (~80%) on a soft pastel
+// background so platform masks never clip the logo.
+const maskSize = 512;
+const inner = Math.round(maskSize * 0.78);
+const resized = await sharp(source)
+  .resize(inner, inner, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
+  .png()
+  .toBuffer();
+
+await sharp({
+  create: {
+    width: maskSize,
+    height: maskSize,
+    channels: 4,
+    background: { r: 233, g: 226, b: 248, alpha: 1 }, // pastel lavender
+  },
+})
+  .composite([{ input: resized, gravity: "center" }])
+  .png()
+  .toFile(join(iconsDir, "maskable-512.png"));
 console.log("wrote maskable-512.png");

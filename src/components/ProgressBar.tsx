@@ -16,14 +16,14 @@ export default function ProgressBar({ progress, label }: ProgressBarProps) {
         </span>
       </div>
       <div
-        className="h-2.5 w-full rounded-full bg-cream-200 overflow-hidden"
+        className="h-2.5 w-full rounded-full bg-white/40 overflow-hidden"
         role="progressbar"
         aria-valuenow={pct}
         aria-valuemin={0}
         aria-valuemax={100}
       >
         <div
-          className="h-full rounded-full bg-gradient-to-r from-sand-400 to-sand-600 transition-[width] duration-300 ease-out"
+          className="h-full rounded-full bg-gradient-to-r from-dream-periwinkle to-dream-purple transition-[width] duration-300 ease-out"
           style={{ width: `${pct}%` }}
         />
       </div>

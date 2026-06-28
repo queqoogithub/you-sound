@@ -120,15 +120,15 @@ export default function Knob({
         className={`relative rounded-full outline-none transition-shadow ${
           disabled
             ? "opacity-50 cursor-not-allowed"
-            : "cursor-ns-resize focus-visible:ring-4 focus-visible:ring-sand-400/40"
+            : "cursor-ns-resize focus-visible:ring-4 focus-visible:ring-dream-periwinkle/40"
         }`}
         style={{ width: size, height: size }}
       >
         {/* Outer track */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-b from-cream-50 to-cream-200 shadow-soft border border-cream-300" />
+        <div className="absolute inset-0 rounded-full border border-white/60 bg-gradient-to-b from-white/80 to-dream-mist/70 shadow-glass backdrop-blur-sm" />
         {/* Inner dial */}
         <div
-          className="absolute rounded-full bg-gradient-to-br from-white to-cream-100 border border-cream-300 shadow-inner"
+          className="absolute rounded-full border border-white/70 bg-gradient-to-br from-white to-dream-mist shadow-inner"
           style={{ inset: size * 0.16 }}
         />
         {/* Pointer */}
@@ -143,11 +143,11 @@ export default function Knob({
             transformOrigin: "50% 100%",
           }}
         >
-          <div className="w-full h-full rounded-full bg-sand-500" />
+          <div className="h-full w-full rounded-full bg-[#8b7fd6]" />
         </div>
         {/* Center cap */}
         <div
-          className="absolute left-1/2 top-1/2 rounded-full bg-sand-400 -translate-x-1/2 -translate-y-1/2"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-dream-periwinkle to-dream-purple"
           style={{ width: size * 0.12, height: size * 0.12 }}
         />
       </div>

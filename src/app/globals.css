@@ -13,24 +13,49 @@ body {
 }
 
 body {
-  background-color: #fffdf9;
-  background-image: radial-gradient(
-      1200px 600px at 80% -10%,
-      rgba(216, 189, 136, 0.18),
-      transparent 60%
-    ),
-    radial-gradient(
-      900px 500px at -10% 10%,
-      rgba(242, 230, 207, 0.5),
-      transparent 55%
-    );
-  background-attachment: fixed;
-  color: #3a342d;
+  background-color: #fbf8fb;
+  color: #332d4d;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Range / number inputs tidy-up */
 input[type="range"] {
-  accent-color: #b59a6c;
+  accent-color: #b8a6f0;
+}
+
+/* Wave drift animation (defined here to use translate3d for smoothness). */
+@keyframes waveDrift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Upward drifting glow particles. */
+@keyframes drift {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-140px) translateX(18px);
+    opacity: 0;
+  }
+}
+
+/* Install modal slide up animation. */
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

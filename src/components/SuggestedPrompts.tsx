@@ -26,7 +26,7 @@ export default function SuggestedPrompts({
             type="button"
             disabled={disabled}
             onClick={() => onSelect(p.prompt)}
-            className="inline-flex items-center gap-1.5 rounded-full border border-cream-300 bg-cream-50 px-3 py-1.5 text-sm text-ink-700 transition-colors hover:bg-cream-200 hover:border-sand-400 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-1.5 rounded-full border border-white/60 bg-white/40 px-3 py-1.5 text-sm text-ink-700 backdrop-blur-sm transition-colors hover:border-dream-periwinkle hover:bg-white/65 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <span aria-hidden>{p.emoji}</span>
             {p.label[locale]}

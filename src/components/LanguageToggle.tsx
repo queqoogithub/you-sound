@@ -7,17 +7,17 @@ export default function LanguageToggle() {
   const { locale, setLocale } = useI18n();
 
   return (
-    <div className="inline-flex rounded-full border border-cream-300 bg-cream-50 p-1 shadow-sm">
+    <div className="inline-flex rounded-full border border-dream-purple/25 bg-white p-1 shadow-sm">
       {LOCALES.map((l) => (
         <button
           key={l}
           type="button"
           onClick={() => setLocale(l)}
           aria-pressed={locale === l}
-          className={`px-3 py-1 text-sm font-medium rounded-full transition-colors ${
+          className={`rounded-full px-3 py-1 text-sm font-medium transition-colors ${
             locale === l
-              ? "bg-sand-500 text-white shadow-sm"
-              : "text-ink-700 hover:bg-cream-200"
+              ? "bg-gradient-to-r from-[#9b87f5] to-[#8b9cff] text-white shadow-sm"
+              : "text-ink-700 hover:bg-dream-mist"
           }`}
         >
           {l === "th" ? "ไทย" : "EN"}

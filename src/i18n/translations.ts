@@ -54,6 +54,13 @@ export const SUGGESTED_PROMPTS: SuggestedPrompt[] = [
     prompt:
       "warm soft ambient strings, cinematic and emotional, slow and peaceful, calming therapeutic atmosphere",
   },
+  {
+    id: "cheery-edm",
+    emoji: "🎉",
+    label: { th: "EDM สดใส", en: "Cheery EDM" },
+    prompt:
+      "a light and cheerly EDM track, with syncopated drums, aery pads, and strong emotions bpm: 130",
+  },
 ];
 
 type Dict = Record<string, { th: string; en: string }>;
@@ -108,6 +115,16 @@ export const T: Dict = {
     en: "First run downloads the model (~150MB) and caches it for next time.",
   },
   installApp: { th: "ติดตั้งแอป", en: "Install app" },
+  installModalTitle: {
+    th: "ติดตั้ง YouSound",
+    en: "Install YouSound",
+  },
+  installModalDesc: {
+    th: "ติดตั้งแอปลงเครื่องเพื่อเปิดใช้งานได้เร็วขึ้น ใช้งานออฟไลน์ และได้ประสบการณ์เต็มจอเหมือนแอปจริง",
+    en: "Install on your device for faster access, offline use, and a full-screen native app experience.",
+  },
+  installModalAction: { th: "ติดตั้งเลย", en: "Install now" },
+  installModalLater: { th: "ไว้ทีหลัง", en: "Maybe later" },
   emptyPromptHint: {
     th: "กรุณาพิมพ์พรอมต์ หรือเลือกพรอมต์แนะนำก่อนสร้างเสียง",
     en: "Type a prompt or pick a suggestion before generating.",

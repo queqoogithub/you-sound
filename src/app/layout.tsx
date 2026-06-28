@@ -22,12 +22,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/icons/icon-192.png",
-    apple: "/icons/icon-192.png",
+    apple: "/icons/apple-touch-icon.png",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fffdf9",
+  themeColor: "#ece6fb",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
