@@ -141,3 +141,14 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# next-pwa generated service worker
+/public/sw.js
+/public/sw.js.map
+/public/workbox-*.js
+/public/workbox-*.js.map
+/public/worker-*.js
+/public/fallback-*.js
+
+# Self-hosted transformers.js bundle (copied from node_modules at build time)
+/public/transformers/

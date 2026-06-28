@@ -1,0 +1,32 @@
+{
+  "name": "YouSound — เสียงบำบัดด้วย AI",
+  "short_name": "YouSound",
+  "description": "สร้างเสียงบำบัดความเครียดและเสียงผ่อนคลายด้วย AI (MusicGen) บน WebGPU",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fffdf9",
+  "theme_color": "#fffdf9",
+  "lang": "th",
+  "categories": ["health", "music", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

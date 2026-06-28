@@ -1,0 +1,33 @@
+{
+  "name": "you-sound",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "predev": "node scripts/copy-transformers.mjs",
+    "dev": "next dev",
+    "prebuild": "node scripts/copy-transformers.mjs",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "setup-assets": "node scripts/copy-transformers.mjs && node scripts/gen-icons.mjs"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "^3.0.2",
+    "idb": "^7.1.1",
+    "next": "14.2.35",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.35",
+    "next-pwa": "^5.6.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5"
+  }
+}

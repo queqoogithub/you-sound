@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: #fffdf9;
+  background-image: radial-gradient(
+      1200px 600px at 80% -10%,
+      rgba(216, 189, 136, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 500px at -10% 10%,
+      rgba(242, 230, 207, 0.5),
+      transparent 55%
+    );
+  background-attachment: fixed;
+  color: #3a342d;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Range / number inputs tidy-up */
+input[type="range"] {
+  accent-color: #b59a6c;
+}
