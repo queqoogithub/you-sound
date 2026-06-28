@@ -21,8 +21,8 @@ export const metadata: Metadata = {
     title: "YouSound",
   },
   icons: {
-    icon: "/icons/icon-192.png",
-    apple: "/icons/apple-touch-icon.png",
+    icon: "/icons/pwa-192.png",
+    apple: "/icons/pwa-192.png",
   },
 };
 

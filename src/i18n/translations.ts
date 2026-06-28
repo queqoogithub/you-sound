@@ -68,7 +68,7 @@ type Dict = Record<string, { th: string; en: string }>;
 export const T: Dict = {
   appName: { th: "YouSound", en: "YouSound" },
   tagline: {
-    th: "สร้างเสียงบำบัดความเครียดด้วย AI ในเบราว์เซอร์ของคุณ",
+    th: "สร้างเสียงบำบัดความเครียดด้วย AI ในสไตล์ของคุณ",
     en: "Generate calming therapeutic sound with AI, right in your browser",
   },
   promptLabel: { th: "อธิบายเสียงที่คุณต้องการ", en: "Describe the sound you want" },
