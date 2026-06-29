@@ -7,56 +7,56 @@ export interface SuggestedPrompt {
   id: string;
   label: { th: string; en: string };
   prompt: string; // The actual prompt sent to the model (English works best)
-  emoji: string;
+  icon: string; // Lucide icon name
 }
 
 // Curated prompts focused on stress relief / relaxing soundscapes.
 export const SUGGESTED_PROMPTS: SuggestedPrompt[] = [
   {
     id: "calm-piano",
-    emoji: "🎹",
+    icon: "Piano",
     label: { th: "เปียโนผ่อนคลาย", en: "Calm Piano" },
     prompt:
       "soft calming solo piano, slow tempo, gentle and warm, ambient reverb, for deep relaxation and stress relief",
   },
   {
     id: "ocean-ambient",
-    emoji: "🌊",
+    icon: "Waves",
     label: { th: "คลื่นทะเลสงบ", en: "Ocean Ambient" },
     prompt:
       "peaceful ambient pad with soft ocean waves, dreamy and spacious, meditative, healing soundscape",
   },
   {
     id: "rain-lofi",
-    emoji: "🌧️",
+    icon: "CloudRain",
     label: { th: "สายฝนโลไฟ", en: "Rainy Lo-fi" },
     prompt:
       "relaxing lo-fi music with gentle rain, mellow warm chords, slow beat, cozy and soothing for sleep",
   },
   {
     id: "forest-meditation",
-    emoji: "🌲",
+    icon: "TreePine",
     label: { th: "สมาธิในป่า", en: "Forest Meditation" },
     prompt:
       "serene meditation music with soft flute and nature ambience, tranquil, slow and breathing, mindfulness",
   },
   {
     id: "tibetan-bowls",
-    emoji: "🔔",
+    icon: "Bell",
     label: { th: "ระฆังบำบัด", en: "Healing Bowls" },
     prompt:
       "tibetan singing bowls and gentle drones, deep healing resonance, slow meditative ambient, stress relief",
   },
   {
     id: "warm-strings",
-    emoji: "🎻",
+    icon: "Music",
     label: { th: "เครื่องสายอบอุ่น", en: "Warm Strings" },
     prompt:
       "warm soft ambient strings, cinematic and emotional, slow and peaceful, calming therapeutic atmosphere",
   },
   {
     id: "cheery-edm",
-    emoji: "🎉",
+    icon: "Zap",
     label: { th: "EDM สดใส", en: "Cheery EDM" },
     prompt:
       "a light and cheerly EDM track, with syncopated drums, aery pads, and strong emotions bpm: 130",
