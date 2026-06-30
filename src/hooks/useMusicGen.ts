@@ -24,6 +24,7 @@ export interface MusicGenState {
   webgpuSupported: boolean;
   error: string | null;
   audioUrl: string | null;
+  audioBlob: Blob | null;
   load: () => void;
   generate: (opts: GenerateOptions) => void;
 }
@@ -38,6 +39,7 @@ export function useMusicGen(): MusicGenState {
   const [webgpuSupported, setWebgpuSupported] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
 
   useEffect(() => {
     const worker = new Worker("/workers/musicgen-worker.js", {
@@ -67,6 +69,7 @@ export function useMusicGen(): MusicGenState {
           const url = URL.createObjectURL(blob);
           audioUrlRef.current = url;
           setAudioUrl(url);
+          setAudioBlob(blob);
           setStatus("ready");
           break;
         }
@@ -121,6 +124,7 @@ export function useMusicGen(): MusicGenState {
     webgpuSupported,
     error,
     audioUrl,
+    audioBlob,
     load,
     generate,
   };

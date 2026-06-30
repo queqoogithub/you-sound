@@ -9,6 +9,8 @@ import LanguageToggle from "@/components/LanguageToggle";
 import SuggestedPrompts from "@/components/SuggestedPrompts";
 import Background from "@/components/Background";
 import InstallModal from "@/components/InstallModal";
+import SavedSounds from "@/components/SavedSounds";
+import { saveSound } from "@/lib/savedSoundsDB";
 
 // Tone knob range maps to guidance_scale (prompt adherence / character).
 const TONE_MIN = 1.5;
@@ -23,6 +25,7 @@ export default function Home() {
     webgpuSupported,
     error,
     audioUrl,
+    audioBlob,
     generate,
   } = useMusicGen();
 
@@ -30,7 +33,9 @@ export default function Home() {
   const [tone, setTone] = useState(3);
   const [duration, setDuration] = useState(8);
   const [showPromptHint, setShowPromptHint] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
   const promptRef = useRef<HTMLTextAreaElement | null>(null);
+  const lastGenRef = useRef<{ prompt: string; guidanceScale: number; durationSec: number } | null>(null);
 
   const isBusy = status === "loading" || status === "generating";
 
@@ -42,11 +47,33 @@ export default function Home() {
       return;
     }
     setShowPromptHint(false);
-    generate({
+    setSaveStatus("idle");
+    const opts = {
       prompt: prompt.trim(),
       guidanceScale: tone,
       durationSec: duration,
-    });
+    };
+    lastGenRef.current = opts;
+    generate(opts);
+  };
+
+  const handleSave = async () => {
+    if (!audioBlob || !lastGenRef.current) return;
+    setSaveStatus("saving");
+    try {
+      await saveSound({
+        id: crypto.randomUUID(),
+        prompt: lastGenRef.current.prompt,
+        createdAt: Date.now(),
+        durationSec: lastGenRef.current.durationSec,
+        guidanceScale: lastGenRef.current.guidanceScale,
+        blob: audioBlob,
+      });
+      setSaveStatus("saved");
+      window.dispatchEvent(new CustomEvent("yousound:saved"));
+    } catch {
+      setSaveStatus("idle");
+    }
   };
 
   return (
@@ -224,18 +251,31 @@ export default function Home() {
             {audioUrl ? (
               <div className="mt-2 rounded-2xl border border-white/60 bg-white/55 p-4">
                 <audio controls src={audioUrl} className="w-full" />
-                <a
-                  href={audioUrl}
-                  download="yousound.wav"
-                  className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-white/60 bg-white/40 px-4 py-1.5 text-sm font-medium text-ink-700 hover:bg-white/60"
-                >
-                  ⬇ {t("download")}
-                </a>
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  <a
+                    href={audioUrl}
+                    download="yousound.wav"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-white/60 bg-white/40 px-4 py-1.5 text-sm font-medium text-ink-700 hover:bg-white/60"
+                  >
+                    ⬇ {t("download")}
+                  </a>
+                  <button
+                    type="button"
+                    onClick={handleSave}
+                    disabled={saveStatus === "saving" || saveStatus === "saved"}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-dream-purple/30 bg-dream-purple/10 px-4 py-1.5 text-sm font-medium text-dream-purple hover:bg-dream-purple/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    {saveStatus === "saved" ? "✓ " + t("saved") : saveStatus === "saving" ? "..." : "💾 " + t("save")}
+                  </button>
+                </div>
               </div>
             ) : (
               <p className="mt-2 text-sm text-ink-400">{t("noResult")}</p>
             )}
           </div>
+
+          {/* Saved sounds */}
+          <SavedSounds />
         </div>
       </section>
 

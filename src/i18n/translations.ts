@@ -129,4 +129,13 @@ export const T: Dict = {
     th: "กรุณาพิมพ์พรอมต์ หรือเลือกพรอมต์แนะนำก่อนสร้างเสียง",
     en: "Type a prompt or pick a suggestion before generating.",
   },
+  savedSounds: { th: "เสียงที่บันทึกไว้", en: "Saved sounds" },
+  save: { th: "บันทึก", en: "Save" },
+  saved: { th: "บันทึกแล้ว", en: "Saved" },
+  deleteSaved: { th: "ลบ", en: "Delete" },
+  noSavedSounds: {
+    th: "ยังไม่มีเสียงที่บันทึกไว้",
+    en: "No saved sounds yet.",
+  },
+  savedAt: { th: "บันทึกเมื่อ", en: "Saved at" },
 };
